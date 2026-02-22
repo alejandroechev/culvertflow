@@ -1,0 +1,9 @@
+{
+  "name": "culvertflow",
+  "private": true,
+  "scripts": {
+    "test": "pnpm -r test",
+    "build": "pnpm -r build",
+    "dev": "pnpm --filter @culvertflow/web dev"
+  }
+}

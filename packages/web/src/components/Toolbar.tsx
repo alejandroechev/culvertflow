@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { SAMPLES } from '../samples';
+import { FeedbackModal } from './FeedbackModal';
 
 interface Props {
   theme: 'light' | 'dark';
@@ -11,6 +13,7 @@ interface Props {
 }
 
 export function Toolbar({ theme, onToggleTheme, onNew, onOpen, onSave, onReport, onLoadSample }: Props) {
+  const [showFeedback, setShowFeedback] = useState(false);
   return (
     <div className="toolbar no-print">
       <h1>🔧 CulvertFlow</h1>
@@ -32,9 +35,11 @@ export function Toolbar({ theme, onToggleTheme, onNew, onOpen, onSave, onReport,
       </div>
       <div className="toolbar-right">
         <button onClick={() => window.open('/intro.html', '_blank')} title="Domain guide">📖 Guide</button>
-        <button onClick={() => window.open('https://github.com/alejandroechev/culvertflow/issues/new', '_blank')} title="Feedback">💬 Feedback</button>
+        <button onClick={() => setShowFeedback(true)} title="Feedback">💬 Feedback</button>
+        <a className="github-link" href="https://github.com/alejandroechev/culvertflow" target="_blank" rel="noopener noreferrer">GitHub</a>
         <button onClick={onToggleTheme}>{theme === 'light' ? '🌙' : '☀️'}</button>
       </div>
+      {showFeedback && <FeedbackModal product="CulvertFlow" onClose={() => setShowFeedback(false)} />}
     </div>
   );
 }
